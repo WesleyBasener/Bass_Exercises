@@ -1,0 +1,83 @@
+\documentclass[10pt]{article}
+
+\usepackage[margin=1in]{geometry} 
+\usepackage{amsmath,amsthm,amssymb, graphicx, multicol, array}
+
+\newtheorem{innercustomgeneric}{\customgenericname}
+\providecommand{\customgenericname}{}
+\newcommand{\newcustomtheorem}[2]{%
+	\newenvironment{#1}[1]
+	{%
+		\renewcommand\customgenericname{#2}%
+		\renewcommand\theinnercustomgeneric{##1}%
+		\innercustomgeneric
+	}
+	{\endinnercustomgeneric}
+}
+
+\newcustomtheorem{customthm}{Theorem}
+\newcustomtheorem{customlemma}{Lemma}
+
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+
+\newenvironment{problem}[2][Problem]{\begin{trivlist}
+		\item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+
+\begin{document}
+	
+	\title{Exercises from Chapter 3}
+	\author{Wesley Basener}
+	\maketitle
+	
+	\begin{problem}{1}
+		Suppose $(X, \mathcal{A})$ is a measurable space and $\mu$ is a
+		non-negative set function that is finitely additive and such that
+		$\mu(\emptyset) = 0$ and $\mu(B)$ is finite for some non-empty $B \in \mathcal{A}$. Suppose that whenever $A_i$ is an increasing sequence of sets in $\mathcal{A}$, then
+		$\mu(\cup_i A_i ) = lim_i \rightarrow \infty \mu(A_i)$. Show that $\mu$ is a measure.
+		\begin{proof}
+			We are given the first requirement for $\mu$ to be a measure, namely that $\mu(\emptyset) = 0$. So, we need only show countable additivity. Let $B = \{B_0, B_1, ...\}$ be a countably infinite collection of pairwise disjoint sets in $\mathcal{A}$. Define $A = \{A_0, A_1, ...\}$ to be the set where $A_n = \cup_{i=0}^n B_i$. Clearly, $A_i$ is an increasing sequence of sets.
+			
+			Since $\mu$ is finitely additive, we have that $\mu( \cup_{i=0}^n B_i) = \Sigma_{i=0}^n \mu(B_i)$. And, since $\cup_{i=0}^n B_i = A_n$, we can conclude
+			\begin{align*}
+				\mu(\cup_i B_i) = \mu(\cup_i A_i) = lim_i \rightarrow \infty \mu(A_i) = lim_n \rightarrow \infty \Sigma_{i=0}^n \mu(B_i) = \Sigma_{i=0}^\infty \mu(B_i)
+			\end{align*}
+		\end{proof}
+		
+		\begin{problem}{3}
+			Let $X$ be an uncountable set and let $\mathcal{A}$ be the collection of subsets $A$ of $X$ such that either $A$ or $A^c$ is countable. Define
+			$\mu(A) = 0$ if $A$ is countable and $\mu(A) = 1$ if $A$ is uncountable. Prove
+			that $\mu$ is a measure.
+			\begin{proof}
+				Although this would need to be proven, we take it as given that $\mathcal{A}$ is a $\sigma$-algebra on $X$ because this was demonstrated in the book and we are lazy.
+				
+				Since $\emptyset^c = X$ is uncountable, $\emptyset$ is countable and $\mu(\emptyset) = 0$. Hence, we have the first part of the definition covered. 
+				
+				For countable additivity, let $A = \{A_0, A_1, ...\}$ be any collection of pairwise disjoint elements of $\mathcal{A}$. If some $A_i$ in $A$ is uncountable, say $A_0$, then $A_0^c$ must be countable. And, because $A$ is pairwise disjoint, $\cup_{i=1}^\infty A_i \subseteq A_0^c$. So must $\{A_1, A_2 ...\}$ also be countable. Therefore, at most one of the sets in $A$ can be uncountable.
+				
+				Thus, if $A$ contains only countable sets, $\mu(\cup_i A_i) = 0 = \Sigma_{i=0}^\infty \mu(A_i)$. Otherwise, $\mu(\cup_i A_i) = 1 = \Sigma_{i=0}^\infty \mu(A_i)$. Therefore, $\mu$ is countably additive and is a measure.
+			\end{proof}
+		\end{problem}
+		
+		\begin{problem}{5}
+			Prove that if $\mu_1, \mu_2 , . . .$ are
+			measures on a measurable space and $a_1, a_2 , ... \in [0, \infty)$, then $\Sigma_{n=1}^\infty a_n\mu_n$ is also a measure.
+			\begin{proof}
+				First, we show the measure of the empty set is zero $\Sigma_{n=1}^\infty a_n\mu_n(\emptyset) = \Sigma_{n=1}^\infty 0 = 0$.
+				
+				Next, let $A_i$ be a countable collection of sets, in the given measurable space. Then, 
+				\begin{align*}
+					\Sigma_{n=1}^\infty a_n\mu_n(\cup_i A_i) = \Sigma_{n=1}^\infty \Sigma_{i=0}^\infty a_n\mu_n(A_i) = \Sigma_{i=1}^\infty \Sigma_{n=0}^\infty a_n\mu_n(A_i)
+				\end{align*}
+				Therefore, the given function has countable additivity and is thus a measure.
+			\end{proof}
+		\end{problem}
+	\end{problem}
+	
+	\begin{problem}{5}
+		Suppose $\mu_1, \mu_2, ...$ are measures on a measurable
+		space $(X, \mathcal{A})$ and $\mu_n(A)\uparrow$ for each $A \in \mathcal{A}$. Define
+		$\mu(A) = \lim \mu_n(A)$. Is $\mu$ necessarily a measure? If not, give a counterexample. What if $\mu_n(A)\downarrow$ for each $A \in \mathcal{A}$ and $\mu_1(X) < \infty$?
+	\end{problem}
+	
+\end{document}
