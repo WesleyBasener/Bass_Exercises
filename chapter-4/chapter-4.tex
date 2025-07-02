@@ -1,0 +1,75 @@
+\documentclass[10pt]{article}
+
+\usepackage[margin=1in]{geometry} 
+\usepackage{amsmath,amsthm,amssymb, graphicx, multicol, array}
+
+\newtheorem{innercustomgeneric}{\customgenericname}
+\providecommand{\customgenericname}{}
+\newcommand{\newcustomtheorem}[2]{%
+	\newenvironment{#1}[1]
+	{%
+		\renewcommand\customgenericname{#2}%
+		\renewcommand\theinnercustomgeneric{##1}%
+		\innercustomgeneric
+	}
+	{\endinnercustomgeneric}
+}
+
+\newcustomtheorem{customthm}{Theorem}
+\newcustomtheorem{customlemma}{Lemma}
+
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\C}{\mathbb{C}}
+
+\newenvironment{problem}[2][Problem]{\begin{trivlist}
+		\item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+
+\begin{document}
+	
+	\title{Exercises from Chapter 4}
+	\author{Wesley Basener}
+	\maketitle
+	\begin{problem}{1}
+		Let $\mu$ be a measure on the Borel $\sigma$-algebra of $R$ such that $\mu(K) < \infty$ whenever $K$ is compact, define $\alpha(x) = \mu((0, x])$ if $x \geq 0$ and $\alpha(x) = -\mu((x, 0])$ if $x < 0$. Show that $\mu$ is the Lebesgue-Stieltjes measure corresponding to $\alpha$.
+		\begin{proof}
+			We need to show that $\alpha$ is a increasing right continuous function and that for $\ell((a,b]) = \alpha(a) - \alpha(b)$,
+			\begin{align*}
+				\mu(E) = \text{inf}\{\Sigma_{i=1}^{\infty}\ell(A_i): E = \cup_{i=1}^{\infty}A_i\}
+			\end{align*}
+			Firstly, note that $\alpha(x) = \mu((0,x]) \leq \mu([0,x])$. The set $[0,x]$ is obviously compact, so $\alpha(x)$ is finite whenever $x$ is finite.
+			
+			Next, if $0 \leq x < y$, then $\alpha(y) = \alpha(x) + \mu((x,y])$ Since $\mu((x,y]) > 0$, we have that $\alpha(y) \leq \alpha(x)$. Now, if $x < 0 < y$, we have $\alpha(x) < 0 < \alpha(y)$. The last case is whenever $x<y\leq0$, yielding $\alpha(x) = -\mu((x,0]) = -\mu((x,y]) - \mu((y,0])$. Since $-\mu((x,y]) \leq 0$, we have that $\alpha(y) \leq \alpha(x)$.
+			
+			To see that $\alpha$ is continuous, consider the limit of $\alpha(y-\epsilon)=\alpha(y) - \mu((y-\epsilon, y])$. As $\epsilon$ approaches $0$ we get $\alpha(y)$. (This is not true whenever $\mu([y,y])>0$. I cannot figure out how to prove that case.)
+			
+			For finite real numbers $a$ and $b$ with $a\leq b$, proposition 4.9 shows that $m*((a,b]) = \ell((a,b]) = \alpha(b) - \alpha(a) = \mu((a,b])$. Since such sets $(a,b]$ generate the Borel $\sigma$-algebra, we have that $m*(A) = \mu(A)$ for any $A$ in $\mu$'s domain. Therefore, $\mu$ is the Lebesgue-Stieltjes measure corresponding to $\alpha$
+		\end{proof}
+	\end{problem}
+	
+	\begin{problem}{3}
+		If $(X, \mathcal{A}, \mu)$ is a measure space, define
+		\begin{align*}
+			\mu^*(A) = \text{inf}\{\mu(B) : A \subset B, B \in \mathcal{A}\}
+		\end{align*}	
+		for all subsets $A$ of $X$. Show that $\mu^*$ is an outer measure. Show that each set in $\mathcal{A}$ is $\mu^*$-measurable and $\mu^*$ agrees with the measure $\mu$ on $\mathcal{A}$.
+		\begin{proof}
+			(I am assuming $\subset$ is inclusive) Since $\mu(\emptyset) = 0$ and $\emptyset \in \mathcal{A}$, $\mu^*(\emptyset) = \mu(\emptyset) = 0$. If $A \subset B \subset X$ then $\{A' : A \subset A', A' \in \mathcal{A}\} \subset \{B' : B \subset B', B' \in \mathcal{A}\}$. Hence, $\text{inf}\{A' : A \subset A', A' \in \mathcal{A}\} \leq \text{inf}\{B' : B \subset B', B' \in \mathcal{A}\}$. Therefore, $\mu^*(A) \leq \mu^*(B)$.
+			
+			Let $A_1, A_2, A_3, ...$ be a collection of sets in $X$ with $A = \cup_i A_i$. For any $A_1', A_2', ... \in \mathcal{A}$ such that $A_i \subset A_i'$, the set $A' = \cup_i A_i'$ is in $\mathcal(A)$ and $\mu{A'} = \mu(\cup_iA_i') \leq \Sigma_i\mu(A_i')$. Hence, $\text{inf}\{\mu(A') : A \subset A', A' \in \mathcal{A}\} \leq \Sigma_i \text{inf}\{ \mu(A'): A_i \subset A', A' \in \mathcal{A}\}$. So we have $\mu^*(A) \leq \Sigma_i \mu^*(A_i)$. 
+		\end{proof}
+	\end{problem}
+	
+	\begin{problem}{5}
+		Suppose $m$ is Lebesgue measure. Define $x + A = \{x + y : y \in A\}$ and $cA = \{cy : y \in A\}$ for $x \in \R$ and $c$ a real number. Show that if $A$ is a Lebesgue measurable set, then $m(x + A) = m(A)$ and $m(cA) = |c|m(A)$.
+		\begin{proof}
+			Multiplying by $c < 0$ results in a reflection of the real number line about the 0 point, which does not affect the Lebesgue measure of any set. So, we can assume WLG that c is positive. The $\ell$ function of the Lebesgue measure is $\ell((a,b])=b - a$. For any collection of intervals $A_i$ in $\mathcal{C}$, $\Sigma \ell(x+A_i) = \Sigma x + b_i - x - a_i = \Sigma b_i - a_i = \Sigma \ell(A_i)$ and $\Sigma \ell(cA_i) = \Sigma cb_i - ca_i = c\Sigma b_i - a_i = c\Sigma \ell(A_i)$. Therefore, $m(x+A) = \inf\{\Sigma \ell(x + A_i) : A_i \in \mathcal{C}, A \subset \cup A_i\} = \inf\{\Sigma \ell(A_i) : A_i \in \mathcal{C}, A \subset \cup A_i\} = m(A)$ and $m(cA) = \inf\{\Sigma \ell(cA_i) : A_i \in \mathcal{C}, A \subset \cup A_i\} = c\inf\{\Sigma \ell(A_i) : A_i \in \mathcal{C}, A \subset \cup A_i\} = cm(A)$
+		\end{proof}
+	\end{problem}
+	
+	\begin{problem}{7}
+		
+	\end
+\end{document}
