@@ -70,6 +70,106 @@
 	\end{problem}
 	
 	\begin{problem}{7}
-		
-	\end
+		Suppose $\epsilon \in (0,1)$ and $m$ is Lebesgue measure. Find a measurable set $E \subset [0, 1]$ such that the closure of $E$ is $[0, 1]$ and $m(E) = \epsilon$.
+		\begin{proof}
+			Consider the set $[\Q \cap (\epsilon,1)] \cup (0,\epsilon)$. The measure of this set is $m([\Q \cap (\epsilon,1)]) + m((0,\epsilon)) = 0 + \epsilon = \epsilon$.
+			Since this set contains every rational number in $(0,1)$, its closure is obviously $[0,1]$.
+		\end{proof}
+	\end{problem}
+	
+	\begin{problem}{9}
+		Let $m$ be Lebesgue measure. Find an example of Lebesgue measurable subsets $A_1, A_2, ...$ of $[0, 1]$ such that $m(A_n) > 0$ for each $n$, $m(A_n \triangle A_m) > 0$ if $n \not = m$, and $m(A_n \cap A_m ) = m(A_n)m(A_m)$ if $n \not= m$.
+		\begin{proof}
+			Let $A_1$ be the set of measure $0.5$ centered on $0.5$ (ie. $A_1 = (1/4, 3/4)$). For any $A_k$ we define $A_{k+1}$ as the collecting of sets which: 1 contain the endpoints of $A_k$, 2 all have equal measure summing to $\frac{m(A_k)}{2}$, and 3 are each shifted from centering on the endpoints of $A_k$ in such a way that $\frac{m(A_k \cap A_{k+1})}{m(A_{k+1})} = m(A_k)$.
+			
+			Let $m \not= n$ be such that $m > n$. $m(A_n \triangle A_m)$ is not zero, since $A_n$ contains elements outside of $A_m$. We also have $m(A_n \cap A_)$ //TODO
+		\end{proof}
+	\end{problem}
+	
+	\begin{problem}{11}
+		Suppose $m$ is Lebesgue measure and $A$ is a Borel
+		measurable subset of $\R$ with $m(A) > 0$. Prove that if
+		\begin{align*}
+			B = \{x - y : x, y \in A\},
+		\end{align*}
+		then $B$ contains a non-empty open interval centered at the origin.
+		This is known as the Steinhaus theorem.
+		\begin{proof}
+			Given that $A$ is Borel, it can be represented as the union of open intervals. Let $(a,b) \subset A$ be any such interval. With the operations defining $B$, $b-a$ and $a-b$ are the inf and sup elements respectively. Hence, the set in $B$ corresponding to $(a,b)$ is $(a-b, b-a)$, which is obviously centered at $0$
+		\end{proof}
+	\end{problem}
+	
+	\begin{problem}{13}
+		Let $N$ be the non-measurable set defined in Section
+		4.4. Prove that if $A \subset N$ and $A$ is Lebesgue measurable, then $m(A) = 0$.
+		\begin{proof}
+			Suppose $A$ is any measurable subset of $N$. Then, as in the proof, we have:
+			\begin{align*}
+				\cup_{q \in [-1,1]\cap\Q}(A+q) \subset [-1,2]
+			\end{align*}
+			Hence,
+			\begin{align*}
+				3 \geq \Sigma_{q \in [-1,1],q\in\Q} m(A+q)
+			\end{align*}
+			Therefore, $m(A)=0$.
+		\end{proof}
+	\end{problem}
+	
+	\begin{problem}{15}
+		Let $X$ be a set and $\mathcal{A}$ a collection of subsets of $X$ that form an algebra of sets. Suppose $\ell$ is a measure on $A$ such that $\ell(X) < \infty$. Define $\mu^*$ using $\ell$ as in (4.1). Prove that a set $A$ is $\mu^*$-measurable if and only if
+		\begin{align*}
+			\mu^*(A) = \ell(X) - \mu^*(A^c).
+		\end{align*}
+		\begin{proof}
+			First, consider $m^*(X) = \inf\{\Sigma\ell(A_i) | \cup A_i = X\}$. Setting $A_1, A_2, ...$ to $X, \emptyset, \emptyset$ clearly yields the $\inf$. Hence, $\ell(X) = m^*(X)$.
+			
+			We can rewrite the given equation as $\ell(X) = \mu^*(A) + \mu^*(A^c)$. Let $E$ be any subset of $X$. Then, subtracting both sides by $\mu^*(E^c)$ yields $\ell(X) - m^*(E^c) = m^*(X) - \mu^*(E^c)$ on the left, which can be expanded to
+			\begin{align*}
+				\inf\{\Sigma \ell(A_i) | \cup A_i = X\} - \inf\{\Sigma \ell(B_i) | \cup B_i = E^c\}
+			\end{align*}
+			Subtracting this by $m^*(E)$ yields 
+			\begin{align*}
+				\inf\{\Sigma \ell(A_i) | \cup A_i = X\} - \inf\{\Sigma \ell(B_i) | \cup B_i = E^c\} - \inf\{\Sigma \ell(C_i) | \cup C_i = E\}
+			\end{align*}
+			Which can be combined to 
+			\begin{align*}
+				\inf\{\Sigma \ell(A_i) | \cup A_i = X\} - \inf\{\Sigma \ell(B_i) + \ell(C_i) | \cup B_i = E^c, \cup C_i = E \}
+			\end{align*}
+			Which is clearly $\inf\{\Sigma \ell(A_i) | \cup A_i = X\} - \inf\{\Sigma \ell(A_i) | \cup A_i = X\} = 0$. Hence, we have $[m^*(X) - m^*(E^c)] - m^*(E) = 0$. This clearly implies that $m^*(X) - m^*(E^c) = m^*(E)$.
+			\\
+			
+			On the right, we have $\mu*(A) + \mu*(A^c) - \mu*(E^c)$, which similarly can be written as 
+			\begin{align*}
+				\inf\{\Sigma \ell(A_i) | \cup A_i = A\} + \inf\{\Sigma \ell(A_i) | \cup A_i = A^c\} - \inf\{\Sigma \ell(B_i) | \cup B_i = E^c\}
+			\end{align*}
+			Splitting $\inf\{\Sigma \ell(B_i) | \cup B_i = E^c\}$ into two yields
+			\begin{align*}
+				 \inf\{\Sigma \ell(A_i) | \cup A_i = A\} + \inf\{\Sigma \ell(A_i) | \cup A_i = A^c\} - \inf\{\Sigma \ell(B_i) | \cup B_i = E^c \cap A\} - \inf\{\Sigma \ell(B_i) | \cup B_i = E^c \cap A^c\}
+			\end{align*}
+			Rearranging gives us
+			\begin{align*}
+				[\inf\{\Sigma \ell(A_i) | \cup A_i = A\} - \inf\{\Sigma \ell(B_i) | \cup B_i = E^c \cap A\}] + [\inf\{\Sigma \ell(A_i) | \cup A_i = A^c\} - \inf\{\Sigma \ell(B_i) | \cup B_i = E^c \cap A^c\}]
+			\end{align*}
+			Combining yields
+			\begin{align*}
+				[\inf\{\Sigma \ell(A_i) - \ell(B_i) | \cup A_i = A, \cup B_i = E^c \cap A\}] + [\inf\{\Sigma \ell(A_i) - \ell(B_i) | \cup A_i = A^c, \cup B_i = E^c \cap A^c\}]
+			\end{align*}
+			Which can be rewritten as
+			\begin{align*}
+				[\inf\{\Sigma \ell(A_i) | \cup A_i = E \cap A\}] + [\inf\{\Sigma \ell(A_i) | \cup A_i = E^c \cap A^c\}]
+			\end{align*}
+			Which is of course the definition of $m^*(A \cap E) + m^*(A \cap E^c)$. Thus, we have that, $\mu^*(A) = \ell(X) - \mu^*(A^c)$ and for all $E \subset X$, $m^*(E) = m^*(A \cap E) + m^*(A \cap E^c)$, are equivalent statements. The second statement is the definition of $m^*$ measurability. Therefore, $A$ is $m^*$-measurable if and only if	$m^*(A) = \ell(X) - m^*(A^c)$.
+		\end{proof}
+	\end{problem}
+	
+	\begin{problem}{17}
+		Suppose $A$ is a Lebesgue measurable subset of $\R$ and
+		\begin{align*}
+			B = \cup_{x\in A} [x - 1, x + 1].
+		\end{align*}
+		Prove that $B$ is Lebesgue measurable.
+		\begin{proof}
+			By definition, $m(A) = \inf\{\Sigma (b_i-a_i) | \cup (a_i,b_i) = A\}$ exists. The set $B$ can be defined as //TODO
+		\end{proof}
+	\end{problem}
 \end{document}
