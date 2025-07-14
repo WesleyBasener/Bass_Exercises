@@ -1,0 +1,57 @@
+\documentclass[10pt]{article}
+
+\usepackage[margin=1in]{geometry} 
+\usepackage{amsmath,amsthm,amssymb, graphicx, multicol, array}
+
+\newtheorem{innercustomgeneric}{\customgenericname}
+\providecommand{\customgenericname}{}
+\newcommand{\newcustomtheorem}[2]{%
+	\newenvironment{#1}[1]
+	{%
+		\renewcommand\customgenericname{#2}%
+		\renewcommand\theinnercustomgeneric{##1}%
+		\innercustomgeneric
+	}
+	{\endinnercustomgeneric}
+}
+
+\newcustomtheorem{customthm}{Theorem}
+\newcustomtheorem{customlemma}{Lemma}
+
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\C}{\mathbb{C}}
+
+\newenvironment{problem}[2][Problem]{\begin{trivlist}
+		\item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+
+\begin{document}
+	
+	\title{Exercises from Chapter 5}
+	\author{Wesley Basener}
+	\maketitle
+	\begin{problem}{1}
+		Suppose $(X, \mathcal{A})$ is a measurable space, $f$ is a real-valued function, and $\{x : f(x) > r\} \in \mathcal{A}$ for each rational number $r$. Prove that $f$ is measurable.
+		\begin{proof}
+			We need to show that $\{x : f(x) > q\} \in \mathcal{A}$ holds for any irrational $q$. Let $q$ be any irrational number. Define the sequence of rational numbers $a_0, a_1, a_2,...$ such that $a_i > a_j$ for $i > j$ and $\lim a_i = q$. Then, $\cup_0^\infty \{x : f(x) > a_i\}$ is equivalent to $\{x : f(x) > q\}$ and is the countable union of elements in $\mathcal{A}$, hence is an element of $\mathcal{A}$. Therefore, $\{x : f(x) > r\} \in \mathcal{A}$ for all real $r$, meaning $f$ is measurable.
+		\end{proof}
+	\end{problem}
+	
+	\begin{problem}{3}
+		Suppose $f$ is a measurable function and $f(x) > 0$ for all $x$. Let $g(x) = 1/f(x)$. Prove that $g$ is a measurable function.
+		\begin{proof}
+			By proposition 5.5, $f$ being measurable implies that $\{x : f(x) \leq r\} \in \mathcal{A}$ for all real $r$. But each set $\{x : f(x) \leq r\}$ is equal to $\{x : g(x) > r\}$. Hence, $\{x : g(x) > r\} \in \mathcal{A}$ for all $r$ and $g$ is measurable.
+		\end{proof}
+	\end{problem}
+	
+	\begin{problem}{5}
+		If $f : \R \rightarrow \R$ is Lebesgue measurable, prove that there exists a Borel measurable function $g$ such that $f = g$ a.e.
+		\begin{proof}
+			Since the Lebesgue algebra is the closure of the Borel algebra, 
+		\end{proof}
+	\end{problem}
+	
+	
+\end{document}
