@@ -49,9 +49,32 @@
 	\begin{problem}{5}
 		If $f : \R \rightarrow \R$ is Lebesgue measurable, prove that there exists a Borel measurable function $g$ such that $f = g$ a.e.
 		\begin{proof}
-			Since the Lebesgue algebra is the closure of the Borel algebra, 
+			Since the Lebesgue algebra is the closure of the Borel algebra, any non-Borel measurable Lebesgue set will have measure $0$. Hence, we can construct a function 
+			\[ g(x) = \begin{cases} 
+				0 & x \in N\\
+				f(x) & \text{else}
+			\end{cases}
+			\]
+			Where $N$ is the union of non Borel measurable Lebesgue sets. This function differs from $f$ on a domain of measure $0$. Hence, $f=g$ a.e.
+			//TODO make this more rigorous; pretty sure it doesn't work right now 
 		\end{proof}
 	\end{problem}
 	
+	\begin{problem}{7}
+		Suppose $f : \R \rightarrow \R$ is differentiable at each point. Prove that $f$ and $f'$ are Borel measurable.
+		\begin{proof}
+			Differentiability implies continuity, hence $f$ is Borel measurable. Recall the definition of the derivative is 
+			\begin{align*}
+				f'(x) = \lim_{h\rightarrow 0} \frac{f(x+h) + f(x)}{h}
+			\end{align*}
+			Which is the limit of the sum of measurable functions times a scalar, hence is a measurable function.
+		\end{proof}
+	\end{problem}
 	
+	\begin{problem}
+		Suppose $f : \R \rightarrow \R$ is Lebesgue measurable and $g : \R \rightarrow \R$ is continuous. Prove that $g \circ f$ is Lebesgue measurable. Is this true if $g$ is Borel measurable instead of continuous? Is this true if $g$ is Lebesgue measurable instead of continuous?
+		\begin{proof}
+			
+		\end{proof}
+	\end{problem}
 \end{document}
